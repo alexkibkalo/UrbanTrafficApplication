@@ -1,8 +1,6 @@
-package classes;
-
-import dao.implementationModels.ImplementRouteModel;
-import models.Route;
-import models.RoutingStop;
+import system.dao.implementationModels.ImplementRouteModel;
+import system.models.Route;
+import system.models.RoutingStop;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
@@ -37,3 +35,4 @@ public class InitializationLogging {
         return map;
     }
 }
+

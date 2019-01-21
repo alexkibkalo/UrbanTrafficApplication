@@ -1,7 +1,6 @@
 package servlets;
 
-import dao.implementationModels.ImplementUserModel;
-import org.apache.log4j.Logger;
+import system.dao.implementationModels.ImplementUserModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

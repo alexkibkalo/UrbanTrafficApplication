@@ -1,13 +1,13 @@
-<%@ page import="models.Route" %>
-<%@ page import="java.util.List" %>
-<%@ page import="dao.implementationModels.ImplementRouteModel" %>
-<%@ page import="models.RoutingStop" %>
-<%@ page import="dao.implementationModels.ImplementRoutingStopModel" %>
-<%@ page import="classes.InitializationLogging" %>
-<%@ page import="java.util.Set" %>
-<%@ page import="java.util.Map" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="system.models.Route" %>
+<%@ page import="java.util.List" %>
+<%@ page import="system.dao.implementationModels.ImplementRouteModel" %>
+<%@ page import="system.models.RoutingStop" %>
+<%@ page import="system.dao.implementationModels.ImplementRoutingStopModel" %>
+<%@ page import="system.InitializationLogging" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="system.InitializationLogging" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Urban Traffic Simulation</title>

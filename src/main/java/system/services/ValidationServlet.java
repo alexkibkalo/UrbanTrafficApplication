@@ -1,8 +1,8 @@
 package servlets;
 
-import classes.InitializationLogging;
-import dao.implementationModels.ImplementUserModel;
-import models.User;
+import system.InitializationLogging;
+import system.dao.implementationModels.ImplementUserModel;
+import system.models.User;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,9 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import static classes.InitializationLogging.logger;
-
-@WebServlet("/ValidationServlet")
+@WebServlet("/validation")
 public class ValidationServlet extends HttpServlet {
 
 
@@ -42,9 +40,9 @@ public class ValidationServlet extends HttpServlet {
         }
 
         if (result.equals("true")){
-            logger.info("User " + login + " logged in!");
+            //logger.info("User " + login + " logged in!");
         }else if(result.equals("false")){
-            logger.error("User " + login + " didn't log in!");
+            //logger.error("User " + login + " didn't log in!");
         }
 
         new InitializationLogging().execute();
