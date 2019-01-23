@@ -7,10 +7,19 @@
 
     <mvc:annotation-driven/>
     <context:component-scan base-package="system.controller"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/javascript/**" location="/javascript/"/>
+    <mvc:resources mapping="/icons/**" location="/icons/"/>
+
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="prefix" value="jsp/"/>
         <property name="suffix" value=".jsp"/>
+        <property name="order" value="0"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="order" value="1"/>
     </bean>
 
 </beans>

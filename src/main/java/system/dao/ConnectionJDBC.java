@@ -1,4 +1,4 @@
-package dao;
+package system.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,26 +6,22 @@ import java.sql.SQLException;
 
 public class ConnectionJDBC {
 
-    private static Connection connection;
-
-    public static Connection getConnection(){
-        if(connection == null){
-            try {
-                connection = DriverManager.getConnection(Constants.URL, Constants.USER, Constants.PASSWORD);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return connection;
-    }
-
     static {
         try {
             Class.forName(Constants.DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException ignore) {
         }
     }
 
-    private ConnectionJDBC(){ }
+    public Connection getConnection() {
+
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection(Constants.URL, Constants.LOGIN, Constants.PASSWORD);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return connection;
+    }
 }

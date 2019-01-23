@@ -14,13 +14,12 @@ import java.sql.SQLException;
 @WebServlet("/RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/plain");
         PrintWriter printWriter = response.getWriter();
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-
 
         String result = null;
         try {

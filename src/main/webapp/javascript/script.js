@@ -8,14 +8,17 @@ $(document).ready(function(){
                 login: login,
                 password: password
             },
-            url: 'ValidationServlet',
+            url: '/validation-user',
             success: function(date) {
                 funSuccessSignIn(date);
                 if(date === "true"){
-                    $("#auth").text(login);
-                }else
-                    $("#auth").text("sign in");
+                    window.location.href = "../jsp/simulationOpen.jsp";
+                }
+            },
+            error: function () {
+                alert("Ups... Something gone not right!");
             }
+
         });
     });
 
@@ -59,7 +62,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#more').click(function() {
+    /*$('#more').click(function() {
         var className = content.className;
         if( className.indexOf(' expanded') === -1 ){
             className += ' expanded';
@@ -70,7 +73,7 @@ $(document).ready(function(){
         content.className = className;
         return false;
     });
-
+*/
     $('#close').click(function (){
         document.getElementById("validationForm").reset();
         $('#login').css({
@@ -81,6 +84,7 @@ $(document).ready(function(){
         });
         $("#war").text("");
     });
+
 });
 
 
@@ -100,10 +104,11 @@ function funSuccessSignIn(data){
     }
 }
 
+/*
 function slowScroll(id){
     var offset = 0;
     $('html, body').animate( {
         scrollTop: $(id).offset().top - offset
     }, 500);
     return false;
-}
+}*/

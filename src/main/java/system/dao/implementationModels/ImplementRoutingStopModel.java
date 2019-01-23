@@ -1,10 +1,12 @@
-package dao.implementationModels;
+package system.dao.implementationModels;
 
-import dao.ConnectionJDBC;
-import dao.Constants;
-import dao.DaoFactory;
-import models.RoutingStop;
+import system.dao.Closing;
+import system.dao.ConnectionJDBC;
+import system.dao.Constants;
+import system.dao.DaoFactory;
+import system.models.RoutingStop;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,9 +38,13 @@ public class ImplementRoutingStopModel implements DaoFactory<RoutingStop, Intege
     public List<RoutingStop> getAllObjects() {
         List<RoutingStop> routingStopList = null;
 
+        Connection connection = new ConnectionJDBC().getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
         try {
-            PreparedStatement preparedStatement = ConnectionJDBC.getConnection().prepareStatement(Constants.SQL_SELECT_ALL_ROUTINGSTOPS);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            preparedStatement = connection.prepareStatement(Constants.SQL_SELECT_ALL_ROUTINGSTOPS);
+            resultSet = preparedStatement.executeQuery();
 
             RoutingStop route;
             routingStopList = new ArrayList<>();
@@ -52,8 +58,12 @@ public class ImplementRoutingStopModel implements DaoFactory<RoutingStop, Intege
                 );
                 routingStopList.add(route);
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
+            Closing.close(connection);
+            Closing.close(preparedStatement);
+            Closing.close(resultSet);
         }
 
         return routingStopList;
@@ -61,12 +71,17 @@ public class ImplementRoutingStopModel implements DaoFactory<RoutingStop, Intege
 
     public List<RoutingStop> getRoutingStopsById(int id){
         List<RoutingStop> routingStops = new ArrayList<>();
+
+        Connection connection = new ConnectionJDBC().getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
         RoutingStop routingStop;
+
         try {
-            PreparedStatement preparedStatement1 = ConnectionJDBC.getConnection()
-                    .prepareStatement(Constants.SQL_SELECT_ROUTING_STOPS_BY_ID_ROUTE);
-            preparedStatement1.setInt(1, id);
-            ResultSet resultSet = preparedStatement1.executeQuery();
+            preparedStatement = connection.prepareStatement(Constants.SQL_SELECT_ROUTING_STOPS_BY_ID_ROUTE);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 routingStop = new RoutingStop(resultSet.getInt("id_routing_stop"),
                         resultSet.getString("route_stop_name"),
@@ -75,7 +90,12 @@ public class ImplementRoutingStopModel implements DaoFactory<RoutingStop, Intege
             }
         }catch (SQLException ex) {
             ex.printStackTrace();
+        }finally {
+            Closing.close(connection);
+            Closing.close(preparedStatement);
+            Closing.close(resultSet);
         }
+
         return routingStops;
     }
 }

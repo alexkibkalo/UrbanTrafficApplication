@@ -52,7 +52,7 @@
 }
 
 .modalDialog > #edit_window {
-    width: 937px;
+    width: 904px;
     position: relative;
     margin: 10% auto;
     border-radius: 10px;
@@ -144,11 +144,13 @@
 }
 
 #play{
+    font-size: 25px;
     border-color: #000000;
     background-color: #70dd63;
 }
 
 #stop{
+    font-size: 25px;
     border-color: #000000;
     background-color: #dd7d58;
 }
@@ -160,4 +162,14 @@
 
 #more {
     padding-left: 190px;
+}
+
+.info{
+    margin-top: 100px;
+    margin-left: 330px;
+}
+
+#buttons{
+    margin-top: 15px;
+    margin-left: 530px;
 }

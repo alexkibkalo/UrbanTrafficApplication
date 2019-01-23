@@ -1,9 +1,10 @@
+/*
 package servlets;
 
 import system.InitializationLogging;
 import system.dao.implementationModels.ImplementUserModel;
 import system.models.User;
-
+import system.services.ValidationService;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet("/validation")
+@WebServlet("/ValidationServlet")
 public class ValidationServlet extends HttpServlet {
 
 
@@ -24,6 +25,8 @@ public class ValidationServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         List<User> userList = new ImplementUserModel().getAllObjects();
+
+        InitializationLogging initializationLogging = new InitializationLogging();
 
         String result = "";
         if(!login.isEmpty() && !password.isEmpty()) {
@@ -40,12 +43,13 @@ public class ValidationServlet extends HttpServlet {
         }
 
         if (result.equals("true")){
-            //logger.info("User " + login + " logged in!");
+            ValidationService.setCookie(response, login);
+            InitializationLogging.logger.info("User " + login + " logged in!");
         }else if(result.equals("false")){
-            //logger.error("User " + login + " didn't log in!");
+            InitializationLogging.logger.error("User " + login + " didn't log in!");
         }
 
-        new InitializationLogging().execute();
+        new ValidationService().loadData();
 
         printWriter.print(result);
     }
@@ -54,3 +58,4 @@ public class ValidationServlet extends HttpServlet {
 
     }
 }
+*/

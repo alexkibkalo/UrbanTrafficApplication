@@ -1,9 +1,11 @@
-package dao.implementationModels;
+package system.dao.implementationModels;
 
-import dao.ConnectionJDBC;
-import dao.Constants;
-import dao.DaoFactory;
-import models.User;
+import system.InitializationLogging;
+import system.dao.Closing;
+import system.dao.ConnectionJDBC;
+import system.dao.Constants;
+import system.dao.DaoFactory;
+import system.models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,8 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static classes.InitializationLogging.logger;
 
 public class ImplementUserModel implements DaoFactory<User, Integer> {
 
@@ -29,14 +29,17 @@ public class ImplementUserModel implements DaoFactory<User, Integer> {
 
     @Override
     public boolean create() throws SQLException {
-        Connection connection = ConnectionJDBC.getConnection();
+
+        Connection connection = new ConnectionJDBC().getConnection();
+        PreparedStatement preparedStatement1 = null, preparedStatement2 = null;
+        ResultSet resultSet = null;
 
         try {
             connection.setAutoCommit(false);
-            PreparedStatement preparedStatement1 = connection.prepareStatement(Constants.SQL_GET_USER);
+            preparedStatement1 = connection.prepareStatement(Constants.SQL_GET_USER);
             preparedStatement1.setString(1, login);
             preparedStatement1.setString(2, password);
-            ResultSet resultSet = preparedStatement1.executeQuery();
+            resultSet = preparedStatement1.executeQuery();
             while (resultSet.next()) {
                 User user = new User(resultSet.getString("login"), resultSet.getString("password"));
                 if(user.getLogin().equals(login)){
@@ -44,20 +47,23 @@ public class ImplementUserModel implements DaoFactory<User, Integer> {
                 }
             }
 
-            PreparedStatement preparedStatement2 = ConnectionJDBC.getConnection().prepareStatement(Constants.SQL_CREATE_NEW_USER);
+            preparedStatement2 = connection.prepareStatement(Constants.SQL_CREATE_NEW_USER);
             preparedStatement2.setString(1, login);
             preparedStatement2.setString(2, password);
             preparedStatement2.executeUpdate();
 
             connection.commit();
-            logger.info("Transaction 'Registration user' successfully executed!");
+            InitializationLogging.logger.info("Transaction 'Registration user' successfully executed!");
             return true;
         }catch(Exception ex){
             connection.rollback();
-            logger.error("Transaction 'Registration user' interrupted!");
+            InitializationLogging.logger.error("Transaction 'Registration user' interrupted!");
             return false;
         } finally {
-            connection.close();
+            Closing.close(connection);
+            Closing.close(preparedStatement1);
+            Closing.close(preparedStatement2);
+            Closing.close(resultSet);
         }
     }
 
@@ -78,13 +84,15 @@ public class ImplementUserModel implements DaoFactory<User, Integer> {
 
     @Override
     public List<User> getAllObjects() {
-
         List<User> userList = null;
 
+        Connection connection = new ConnectionJDBC().getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
 
         try {
-            PreparedStatement preparedStatement = ConnectionJDBC.getConnection().prepareStatement(Constants.SQL_SELECT_ALL_USERS);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            preparedStatement = connection.prepareStatement(Constants.SQL_SELECT_ALL_USERS);
+            resultSet = preparedStatement.executeQuery();
 
             User user;
             userList = new ArrayList<>();
@@ -94,8 +102,12 @@ public class ImplementUserModel implements DaoFactory<User, Integer> {
                 user = new User(resultSet.getString("login"), resultSet.getString("password"));
                 userList.add(user);
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
+            Closing.close(connection);
+            Closing.close(preparedStatement);
+            Closing.close(resultSet);
         }
 
         return userList;

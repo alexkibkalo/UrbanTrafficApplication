@@ -1,4 +1,4 @@
-package models;
+package system.models;
 
 public class Minibus {
 

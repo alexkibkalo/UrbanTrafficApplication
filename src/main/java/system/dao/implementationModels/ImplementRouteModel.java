@@ -1,10 +1,12 @@
-package dao.implementationModels;
+package system.dao.implementationModels;
 
-import dao.ConnectionJDBC;
-import dao.Constants;
-import dao.DaoFactory;
-import models.Route;
+import system.dao.Closing;
+import system.dao.ConnectionJDBC;
+import system.dao.Constants;
+import system.dao.DaoFactory;
+import system.models.Route;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,12 +36,15 @@ public class ImplementRouteModel implements DaoFactory<Route, Integer> {
 
     @Override
     public List<Route> getAllObjects() {
-
         List<Route> routeList = null;
 
+        Connection connection = new ConnectionJDBC().getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
         try {
-            PreparedStatement preparedStatement = ConnectionJDBC.getConnection().prepareStatement(Constants.SQL_SELECT_ALL_ROUTES);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            preparedStatement = connection.prepareStatement(Constants.SQL_SELECT_ALL_ROUTES);
+            resultSet = preparedStatement.executeQuery();
 
             Route route;
             routeList = new ArrayList<>();
@@ -56,7 +61,9 @@ public class ImplementRouteModel implements DaoFactory<Route, Integer> {
                 routeList.add(route);
             }
         }catch (SQLException ex) {
-            ex.printStackTrace();
+            Closing.close(connection);
+            Closing.close(preparedStatement);
+            Closing.close(resultSet);
         }
 
         return routeList;
