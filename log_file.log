@@ -1,0 +1,50 @@
+17:58:53 INFO  Minibus #3 приехал на остановку 23 Serpnia
+17:58:53 INFO  Minibus #1 приехал на остановку Peremoha
+17:58:53 INFO  Minibus #2 приехал на остановку Universytet
+17:58:54 INFO  Посадка на остановке 23 Serpnia в автобус Minibus #3
+17:58:54 INFO  Посадка на остановке Peremoha в автобус Minibus #1
+17:58:54 INFO  Посадка на остановке Universytet в автобус Minibus #2
+17:58:55 INFO  Minibus #2 уехал из остановки Universytet
+17:58:55 INFO  Minibus #3 уехал из остановки 23 Serpnia
+17:58:55 INFO  Minibus #1 уехал из остановки Peremoha
+17:58:57 WARN  17:58:56.999 IDRS: 5, IDR: 3, IDMB: 3, COUNTERB: 3, COUNTERD: 0, LOADLEVEL: 3
+17:58:57 WARN  17:58:56.999 IDRS: 1, IDR: 1, IDMB: 1, COUNTERB: 1, COUNTERD: 0, LOADLEVEL: 1
+17:58:57 WARN  17:58:56.999 IDRS: 6, IDR: 2, IDMB: 2, COUNTERB: 3, COUNTERD: 0, LOADLEVEL: 3
+17:58:57 INFO  Minibus #1 приехал на остановку Derzhprom
+17:58:57 INFO  Minibus #3 приехал на остановку Metrobudivnykiv
+17:58:57 INFO  Minibus #2 приехал на остановку Derzhprom
+17:58:58 INFO  Высадка на остановке Derzhprom из автобуса Minibus #2
+17:58:58 INFO  Высадка на остановке Derzhprom из автобуса Minibus #1
+17:58:58 INFO  Высадка на остановке Metrobudivnykiv из автобуса Minibus #3
+17:58:59 INFO  Посадка на остановке Metrobudivnykiv в автобус Minibus #3
+17:58:59 INFO  Посадка на остановке Derzhprom в автобус Minibus #1
+17:58:59 INFO  Посадка на остановке Derzhprom в автобус Minibus #2
+17:59:00 INFO  Minibus #3 уехал из остановки Metrobudivnykiv
+17:59:00 INFO  Minibus #1 уехал из остановки Derzhprom
+17:59:00 INFO  Minibus #2 уехал из остановки Derzhprom
+17:59:01 INFO  Minibus #3 на перерыве
+17:59:01 WARN  17:59:01.335 IDRS: 2, IDR: 2, IDMB: 2, COUNTERB: 3, COUNTERD: 4, LOADLEVEL: 3
+17:59:01 INFO  Minibus #2 приехал на остановку Arkhitektora Beketova
+17:59:01 WARN  17:59:01.336 IDRS: 2, IDR: 1, IDMB: 1, COUNTERB: 0, COUNTERD: 1, LOADLEVEL: 0
+17:59:01 INFO  Minibus #1 приехал на остановку Metrobudivnykiv
+17:59:02 INFO  Посадка на остановке Metrobudivnykiv в автобус Minibus #1
+17:59:02 INFO  Высадка на остановке Arkhitektora Beketova из автобуса Minibus #2
+17:59:03 INFO  Minibus #1 уехал из остановки Metrobudivnykiv
+17:59:03 INFO  Посадка на остановке Arkhitektora Beketova в автобус Minibus #2
+17:59:04 INFO  Minibus #2 уехал из остановки Arkhitektora Beketova
+17:59:04 INFO  Minibus #1 на перерыве
+17:59:04 WARN  17:59:04.354 IDRS: 3, IDR: 3, IDMB: 3, COUNTERB: 4, COUNTERD: 0, LOADLEVEL: 7
+17:59:04 INFO  Minibus #3 приехал на остановку Sportyvna
+17:59:05 INFO  Посадка на остановке Sportyvna в автобус Minibus #3
+17:59:05 WARN  17:59:05.375 IDRS: 7, IDR: 2, IDMB: 2, COUNTERB: 1, COUNTERD: 1, LOADLEVEL: 3
+17:59:05 INFO  Minibus #2 приехал на остановку Istorychnyi Muzei
+17:59:06 INFO  Minibus #3 уехал из остановки Sportyvna
+17:59:06 INFO  Высадка на остановке Istorychnyi Muzei из автобуса Minibus #2
+17:59:07 WARN  17:59:07.365 IDRS: 3, IDR: 1, IDMB: 1, COUNTERB: 2, COUNTERD: 1, LOADLEVEL: 2
+17:59:07 INFO  Minibus #1 приехал на остановку Derzhprom
+17:59:07 WARN  17:59:07.375 IDRS: 4, IDR: 3, IDMB: 3, COUNTERB: 0, COUNTERD: 0, LOADLEVEL: 7
+17:59:07 INFO  Minibus #3 приехал на остановку Metrobudivnykiv
+17:59:07 INFO  Посадка на остановке Istorychnyi Muzei в автобус Minibus #2
+17:59:08 INFO  Высадка на остановке Derzhprom из автобуса Minibus #1
+17:59:08 INFO  Высадка на остановке Metrobudivnykiv из автобуса Minibus #3
+17:59:08 INFO  Minibus #2 уехал из остановки Istorychnyi Muzei
