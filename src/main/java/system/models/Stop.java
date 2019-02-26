@@ -43,11 +43,10 @@ public class Stop {
         }
     }
 
-    public void leavingPassenger() {
-        int count = (int) (0 + Math.random() * 4);
-        if (passengers.size() - count >= 0) {
-            for (int i = 0; i < count; i++) {
-                passengers.remove(i);
+    public void leavingPassenger(List<Passenger> list) {
+        if (passengers.size() - list.size() >= 0) {
+            for (Passenger passenger : list) {
+                passengers.remove(getIndex(passenger));
             }
         } else
             passengers.clear();

@@ -47,7 +47,7 @@ public class SimulationService {
 
     public void generate(Stop stop){
         stop.comingPassenger();
-        stop.leavingPassenger();
+        stop.leavingPassenger(getPassengerList((int) (0 + Math.random() * 5), stop));
     }
 
     private List<Passenger> getPassengerList(int count, Stop stop){
