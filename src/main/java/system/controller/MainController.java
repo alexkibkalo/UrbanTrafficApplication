@@ -5,15 +5,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import system.InitializationLogging;
-import system.dao.implementationModels.ImplementUserModel;
+import system.dao.implementation.ImplementUserModel;
 import system.models.User;
+import system.services.LoggingService;
 import system.services.ValidationService;
+import system.simulation.performing.starting.RunnerRoute;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class MainController {
@@ -22,37 +25,44 @@ public class MainController {
     @ResponseBody
     public void validation(@RequestParam(value = "login") String login,
                            @RequestParam(value = "password") String password,
-                           HttpServletResponse response) throws IOException {
+                           HttpServletResponse response) throws IOException, SQLException {
 
         response.setContentType("text/plain");
         PrintWriter printWriter = response.getWriter();
 
-        List<User> userList = new ImplementUserModel().getAllObjects();
+        if (!login.isEmpty() && !password.isEmpty()) {
+            User user = new ImplementUserModel(login, password).read();
 
-        String result = "";
-        if(!login.isEmpty() && !password.isEmpty()) {
-            for (User user : userList){
-                if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
-                    result = "true";
-                    break;
-                }else{
-                    result = "false";
-                }
+            if (user != null) {
+                ValidationService.setCookie(response, login);
+                printWriter.print("true");
+                LoggingService.logger.info("User " + login + " logged in!");
+            } else {
+                printWriter.print("false");
+                LoggingService.logger.warn("Something went wrong for user '" + login + "'!");
             }
-        }else{
-            result = "empty";
+        } else {
+            printWriter.print("empty");
         }
-
-        if (result.equals("true")){
-            ValidationService.setCookie(response, login);
-            InitializationLogging.logger.info("User " + login + " logged in!");
-            new ValidationService().loadData();
-        }else if(result.equals("false")){
-            InitializationLogging.logger.error("User " + login + " didn't log in!");
-        }
-
-        printWriter.print(result);
     }
 
+    @RequestMapping(value = "/simulation-started", method = RequestMethod.POST)
+    @ResponseBody
+    public void simulationStart() {
+        long time = Long.parseLong(LocalTime.now().format(DateTimeFormatter.ofPattern("HH")));
 
+        if (time < 12) {
+            RunnerRoute.getRunnerRoute().run(5);
+        } else if (time >= 12 && time < 18) {
+            RunnerRoute.getRunnerRoute().run(2);
+        } else if (time >= 18) {
+            RunnerRoute.getRunnerRoute().run(4);
+        }
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public void logout(HttpServletResponse response) {
+        ValidationService.deleteCookie(response);
+    }
 }

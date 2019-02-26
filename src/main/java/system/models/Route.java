@@ -1,82 +1,52 @@
 package system.models;
 
-import system.dao.implementationModels.ImplementRoutingStopModel;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class Route extends Thread {
+public class Route {
 
-    private int idRoute;
+    private int id;
     private int fare;
     private int frequency;
 
-    private String routeName;
+    private String name;
 
-    private boolean isRoundRoute;
+    private boolean isRound;
 
-    private Map<String, List<RoutingStop>> routes = new HashMap<>();
+    private List<Minibus> minibuses;
 
-    public Route() {
-    }
-
-    public Route(int idRoute, int fare, int frequency, String routeName, boolean isRoundRoute) {
-
-        this.idRoute = idRoute;
+    public Route(int id, int fare, int frequency, String name, boolean isRound) {
+        this.id = id;
         this.fare = fare;
         this.frequency = frequency;
-        this.routeName = routeName;
-        this.isRoundRoute = isRoundRoute;
-        routes.put(routeName, new ImplementRoutingStopModel().getRoutingStopsById(idRoute));
+        this.name = name;
+        this.isRound = isRound;
     }
 
-    public Map<String, List<RoutingStop>> getRoutes() {
-        return routes;
+    public void setMinibuses(List<Minibus> minibuses) {
+        this.minibuses = minibuses;
     }
 
-    public int getIdRoute() {
-        return idRoute;
+    public boolean isRound() {
+        return isRound;
     }
 
-    public void setIdRoute(int idRoute) {
-        this.idRoute = idRoute;
+    public int getId() {
+        return id;
     }
 
     public int getFare() {
         return fare;
     }
 
-    public void setFare(int fare) {
-        this.fare = fare;
-    }
-
     public int getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(int frequency) {
-        this.frequency = frequency;
+    public String getName() {
+        return name;
     }
 
-    public String getRouteName() {
-        return routeName;
-    }
-
-    public void setRouteName(String routeName) {
-        this.routeName = routeName;
-    }
-
-    public boolean isRoundRoute() {
-        return isRoundRoute;
-    }
-
-    public void setRoundRoute(boolean roundRoute) {
-        isRoundRoute = roundRoute;
-    }
-
-    @Override
-    public void run() {
-        System.out.println("Route: " + routeName + " was started!");
+    public List<Minibus> getMinibusesList() {
+        return minibuses;
     }
 }

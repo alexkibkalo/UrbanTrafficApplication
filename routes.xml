@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Routes>
+    <Route>
+        <id>1</id>
+        <name>Победа - Метростроителей</name>
+        <fare>7</fare>
+        <frequency>3</frequency>
+        <isRound>false</isRound>
+        <Minibuses>
+            <Minibus>
+                <id>1</id>
+                <model>ETALON</model>
+                <capacity>23</capacity>
+            </Minibus>
+        </Minibuses>
+        <Stops>
+            <Stop>
+                <id>1</id>
+                <name>Peremoha</name>
+            </Stop>
+            <Stop>
+                <id>2</id>
+                <name>Derzhprom</name>
+            </Stop>
+            <Stop>
+                <id>3</id>
+                <name>Metrobudivnykiv</name>
+            </Stop>
+        </Stops>
+    </Route>
+    <Route>
+        <id>2</id>
+        <name>Derzhprom (Round)</name>
+        <fare>9</fare>
+        <frequency>4</frequency>
+        <isRound>true</isRound>
+        <Minibuses>
+            <Minibus>
+                <id>1</id>
+                <model>ACURA</model>
+                <capacity>22</capacity>
+            </Minibus>
+        </Minibuses>
+        <Stops>
+            <Stop>
+                <id>2</id>
+                <name>Derzhprom</name>
+            </Stop>
+            <Stop>
+                <id>4</id>
+                <name>Universytet</name>
+            </Stop>
+            <Stop>
+                <id>5</id>
+                <name>23 Serpnia</name>
+            </Stop>
+            <Stop>
+                <id>6</id>
+                <name>Sportyvna</name>
+            </Stop>
+        </Stops>
+    </Route>
+</Routes>
