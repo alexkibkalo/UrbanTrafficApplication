@@ -14,10 +14,10 @@ public class Constants {
     public final static String SQL_CREATE_NEW_USER = "INSERT INTO users VALUE (?, ?)";
 
     //Constants for SQL (RoutingStops)
-    public final static String SQL_SELECT_ALL_ROUTING_STOPS = "SELECT * FROM routingstops";
+    public final static String SQL_SELECT_ALL_ROUTING_STOPS = "SELECT * FROM stops";
     public final static String SQL_SELECT_ROUTING_STOPS_BY_ID_MINIBUS =
-            "SELECT routingstops.id_routing_stop, route_stop_name FROM routingstops\n" +
-            "INNER JOIN route_has_routingstop ON routingstops.id_routing_stop = route_has_routingstop.id_routing_stop\n" +
+            "SELECT stops.id_routing_stop, route_stop_name FROM stops\n" +
+            "INNER JOIN route_has_routingstop ON stops.id_routing_stop = route_has_routingstop.id_routing_stop\n" +
             "INNER JOIN minibuses ON route_has_routingstop.id_route = minibuses.id_route WHERE minibuses.id_minibus = ?";
 
     //Constants for SQL (Logs)

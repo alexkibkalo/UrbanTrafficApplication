@@ -1,6 +1,6 @@
 <%@ page import="system.services.ValidationService" %>
-<%@ page import="system.statistic.Statistic" %>
-<%@ page import="system.statistic.StopLog" %>
+<%@ page import="system.statistic.entities.Statistic" %>
+<%@ page import="system.statistic.entities.StopLog" %>
 <%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

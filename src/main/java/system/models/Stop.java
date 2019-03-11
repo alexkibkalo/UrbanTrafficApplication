@@ -61,4 +61,8 @@ public class Stop {
         }
         return 0;
     }
+
+    public int getSize(){
+        return passengers.size();
+    }
 }

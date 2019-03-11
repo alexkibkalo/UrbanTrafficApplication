@@ -1,4 +1,4 @@
-package system.statistic;
+package system.statistic.entities;
 
 import java.util.ArrayList;
 import java.util.List;

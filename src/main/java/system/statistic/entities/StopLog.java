@@ -1,4 +1,6 @@
-package system.statistic;
+package system.statistic.entities;
+
+import system.statistic.db.DBUpdate;
 
 public class StopLog {
 

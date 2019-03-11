@@ -1,10 +1,14 @@
 .header {
-    background: #ffffff;
-    background: -moz-linear-gradient(#4159e1, #ffffff);
-    background: -webkit-linear-gradient(#4159e1, #ffffff);
-    background: -o-linear-gradient(#4159e1, #ffffff);
+    background: #484b4b;
+    background: -moz-linear-gradient(#4159e1, #484b4b);
+    background: -webkit-linear-gradient(#4159e1, #484b4b);
+    background: -o-linear-gradient(#4159e1, #484b4b);
     padding: 50px;
     margin: -8px;
+}
+
+body{
+    background-color: #484b4b;
 }
 
 .name {
@@ -48,9 +52,9 @@
     padding: 5px 20px 13px 20px;
     border-radius: 10px;
     background: #4159e1;
-    background: -moz-linear-gradient(#fff, #4159e1);
-    background: -webkit-linear-gradient(#fff, #4159e1);
-    background: -o-linear-gradient(#fff, #4159e1);
+    background: -moz-linear-gradient(#484b4b, #4159e1);
+    background: -webkit-linear-gradient(#484b4b, #4159e1);
+    background: -o-linear-gradient(#484b4b, #4159e1);
 }
 
 .close {

@@ -6,7 +6,7 @@ import system.models.Stop;
 import system.simulation.performing.starting.Runner;
 import system.simulation.performing.states.ControllerStates;
 import system.simulation.performing.states.Rest;
-import system.statistic.StopLog;
+import system.statistic.entities.StopLog;
 
 import java.time.LocalTime;
 import java.util.Collections;
@@ -19,6 +19,13 @@ public class NotRoundRoute extends ControllerStates implements Runner {
 
         for (int i = 0; i < 2; i++) {
             for (Stop rs : list) {
+
+                try {
+                    Thread.sleep(route.getFrequency());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 if(!(minibus.getState() instanceof Rest)){
                     changeState(minibus, States.MOVING);
                 }

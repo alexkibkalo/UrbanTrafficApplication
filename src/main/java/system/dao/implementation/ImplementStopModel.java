@@ -5,7 +5,7 @@ import system.dao.connection.ConnectionJDBC;
 import system.dao.constants.Constants;
 import system.dao.factory.DaoFactory;
 import system.models.Stop;
-import system.statistic.StopLog;
+import system.statistic.entities.StopLog;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

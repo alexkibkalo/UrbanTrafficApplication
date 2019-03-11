@@ -14,7 +14,6 @@ import system.simulation.performing.starting.RunnerRoute;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -25,7 +24,7 @@ public class MainController {
     @ResponseBody
     public void validation(@RequestParam(value = "login") String login,
                            @RequestParam(value = "password") String password,
-                           HttpServletResponse response) throws IOException, SQLException {
+                           HttpServletResponse response) throws IOException {
 
         response.setContentType("text/plain");
         PrintWriter printWriter = response.getWriter();

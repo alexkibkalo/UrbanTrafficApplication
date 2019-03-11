@@ -5,7 +5,7 @@ import system.models.Route;
 import system.models.Stop;
 import system.simulation.performing.starting.Runner;
 import system.simulation.performing.states.ControllerStates;
-import system.statistic.StopLog;
+import system.statistic.entities.StopLog;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -17,7 +17,14 @@ public class RoundRoute extends ControllerStates implements Runner {
 
         for (int i = 0; i < 2; i++) {
             for (Stop rs : list) {
+
                 changeState(minibus, States.MOVING);
+
+                try {
+                    Thread.sleep(route.getFrequency());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
                 if (list.get(list.size() - 1).getId() != rs.getId()) {
                     minibus.setCurrentStop(rs.getId());
