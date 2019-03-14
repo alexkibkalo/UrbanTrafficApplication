@@ -4,16 +4,18 @@ import system.dao.implementation.ImplementStopModel;
 import system.simulation.performing.states.State;
 import system.simulation.performing.states.Staying;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Minibus {
+public class Minibus implements Serializable {
 
     private int id;
     private int capacity;
     private int currentStop;
     private int loaded;
     private int unloaded;
+    private int idRoute;
 
     private String model;
 
@@ -140,4 +142,11 @@ public class Minibus {
         state.execute(this);
     }
 
+    public int getIdRoute() {
+        return idRoute;
+    }
+
+    public void setIdRoute(int idRoute) {
+        this.idRoute = idRoute;
+    }
 }

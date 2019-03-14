@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import system.dao.implementation.ImplementUserModel;
 import system.models.User;
+import system.services.LoadingData;
 import system.services.LoggingService;
 import system.services.ValidationService;
 import system.simulation.performing.starting.RunnerRoute;
@@ -34,6 +35,7 @@ public class MainController {
 
             if (user != null) {
                 ValidationService.setCookie(response, login);
+                LoadingData.loadData();
                 printWriter.print("true");
                 LoggingService.logger.info("User " + login + " logged in!");
             } else {

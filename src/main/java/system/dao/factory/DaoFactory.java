@@ -6,13 +6,12 @@ import java.util.List;
 
 /**
  * @param <Entity> тип объекта
- * @param <PrimaryKey> тип первичного ключа
  */
 
 
-public interface DaoFactory<Entity, PrimaryKey extends Serializable> {
+public interface DaoFactory<Entity extends Serializable> {
 
-    boolean create() throws Exception;
+    boolean create(Entity object) throws Exception;
 
     Entity read() throws SQLException;
 

@@ -14,14 +14,43 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImplementStopModel implements DaoFactory<Stop, Integer> {
-
-    private Connection connection = new ConnectionJDBC().getConnection();
+public class ImplementStopModel implements DaoFactory<Stop> {
 
     @Override
-    public boolean create() throws Exception {
-        throw new Exception();
-    }
+    public boolean create(Stop stop) throws Exception {
+        Connection connection = new ConnectionJDBC().getConnection();
+        PreparedStatement preparedStatement1 = null, preparedStatement2 = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection.setAutoCommit(false);
+
+            preparedStatement1 = connection.prepareStatement(Constants.SQL_GET_STOP);
+            preparedStatement1.setInt(1, stop.getId());
+            resultSet = preparedStatement1.executeQuery();
+
+            if (resultSet.next()) {
+                throw new Exception();
+            }
+
+            preparedStatement2 = connection.prepareStatement(Constants.SQL_CREATE_NEW_STOP);
+            preparedStatement2.setInt(1, stop.getId());
+            preparedStatement2.setString(2, stop.getName());
+            preparedStatement2.executeUpdate();
+
+            connection.commit();
+            return true;
+
+        }catch(Exception ex){
+            connection.rollback();
+            return false;
+
+        } finally {
+            Closing.close(connection);
+            Closing.close(preparedStatement1);
+            Closing.close(preparedStatement2);
+            Closing.close(resultSet);
+        }    }
 
     @Override
     public Stop read() {
@@ -31,12 +60,13 @@ public class ImplementStopModel implements DaoFactory<Stop, Integer> {
     @Override
     public List<Stop> getAllObjects() {
         List<Stop> stopsList = null;
+        Connection connection = new ConnectionJDBC().getConnection();
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
-            preparedStatement = connection.prepareStatement(Constants.SQL_SELECT_ALL_ROUTING_STOPS);
+            preparedStatement = connection.prepareStatement(Constants.SQL_SELECT_ALL_STOPS);
             resultSet = preparedStatement.executeQuery();
 
             Stop route;
@@ -61,6 +91,7 @@ public class ImplementStopModel implements DaoFactory<Stop, Integer> {
 
     public List<Stop> getRoutingStopsByIdMinibus(int id){
         List<Stop> routingStops = new ArrayList<>();
+        Connection connection = new ConnectionJDBC().getConnection();
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -68,7 +99,7 @@ public class ImplementStopModel implements DaoFactory<Stop, Integer> {
         Stop routingStop;
 
         try {
-            preparedStatement = connection.prepareStatement(Constants.SQL_SELECT_ROUTING_STOPS_BY_ID_MINIBUS);
+            preparedStatement = connection.prepareStatement(Constants.SQL_SELECT_STOPS_BY_ID_MINIBUS);
             preparedStatement.setInt(1, id);
 
             resultSet = preparedStatement.executeQuery();
@@ -92,6 +123,7 @@ public class ImplementStopModel implements DaoFactory<Stop, Integer> {
 
     public void addStopLog(StopLog log) {
         PreparedStatement preparedStatement = null;
+        Connection connection = new ConnectionJDBC().getConnection();
 
         try {
             preparedStatement = connection.prepareStatement(Constants.SQL_CREATE_LOG);
@@ -116,6 +148,7 @@ public class ImplementStopModel implements DaoFactory<Stop, Integer> {
 
     public void clean(){
         PreparedStatement preparedStatement = null;
+        Connection connection = new ConnectionJDBC().getConnection();
 
         try {
             preparedStatement = connection.prepareStatement(Constants.SQL_CLEAN_TABLE);

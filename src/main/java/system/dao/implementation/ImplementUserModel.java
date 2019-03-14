@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImplementUserModel implements DaoFactory<User, Integer> {
+public class ImplementUserModel implements DaoFactory<User> {
 
     private Connection connection = new ConnectionJDBC().getConnection();
     private String login;
@@ -26,7 +26,7 @@ public class ImplementUserModel implements DaoFactory<User, Integer> {
     }
 
     @Override
-    public boolean create() throws SQLException {
+    public boolean create(User user) throws SQLException {
 
         PreparedStatement preparedStatement1 = null, preparedStatement2 = null;
         ResultSet resultSet = null;
@@ -40,11 +40,8 @@ public class ImplementUserModel implements DaoFactory<User, Integer> {
 
             resultSet = preparedStatement1.executeQuery();
 
-            while (resultSet.next()) {
-                User user = new User(resultSet.getString("login"), resultSet.getString("password"));
-                if(user.getLogin().equals(login)){
-                    throw new Exception();
-                }
+            if (resultSet.next()) {
+                throw new Exception();
             }
 
             preparedStatement2 = connection.prepareStatement(Constants.SQL_CREATE_NEW_USER);

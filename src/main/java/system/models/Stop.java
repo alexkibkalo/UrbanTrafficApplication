@@ -1,9 +1,10 @@
 package system.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stop {
+public class Stop implements Serializable {
     private int id;
 
     private String name;
@@ -64,5 +65,13 @@ public class Stop {
 
     public int getSize(){
         return passengers.size();
+    }
+
+    @Override
+    public String toString() {
+        return "Stop{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

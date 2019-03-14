@@ -1,8 +1,9 @@
 package system.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Route {
+public class Route implements Serializable {
 
     private int id;
     private int fare;
